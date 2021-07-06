@@ -99,7 +99,7 @@ SELECT *
 FROM germain_1460.partos;
 
 # ALTER REMOVED emp_no
-ALTER TABLE germain_1460.partos DROP column emp_no;
+ALTER TABLE germain_1460.partos DROP COLUMN emp_no;
 
 ALTER TABLE germain_1460.partos add email VARCHAR(200);
 
