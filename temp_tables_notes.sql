@@ -118,3 +118,32 @@ FROM numbers.numbers;
 SELECT DATABASE();
 SELECT * FROM numbers;
 
+USE numbers;
+
+SELECT * FROM numbers;
+
+# Zscore = (x - population_mean) / standart_dev
+SELECT avg(n) FROM numbers;
+
+# UNLESS YOU MANUALLY TYPE OUT THE MEAN, YOU'LL NEED A SCALAR SUBQUERY FOR THE MEAN
+SELECT n, n - (SELECT AVG(n) FROM numbers) AS "numerator",
+(SELECT std(n)FROM numbers) AS "denominator"
+FROM numbers;
+
+
+CREATE TEMPORARY TABLE germain_1460.zscore AS
+SELECT n, n - (SELECT AVG(n) FROM numbers) AS "numerator",
+(SELECT std(n)FROM numbers) AS "denominator"
+FROM numbers;
+
+USE germain_1460;
+
+SELECT *
+FROM zscore;
+
+ALTER TABLE zscore ADD zscore float(10, 3);
+
+UPDATE zscore SET zscore = numerator / denominator;
+
+SELECT *
+FROM zscore;
